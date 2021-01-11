@@ -2,9 +2,9 @@
   "name": "express-mesto",
   "version": "1.0.0",
   "description": "`/public` — статика, полученная в результате билда фронтенд-приложения на Реакте  \r `/data` — JSON-файлы для временной эмуляции работы с базой данных  \r `/routes` — папка с файлами роутера",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/SimaNazarova/express-mesto.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sima Nazarova",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SimaNazarova/express-mesto/issues"
@@ -22,7 +22,8 @@
     "eslint": "^7.2.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "webpack-cli": "^4.3.1"
   },
   "dependencies": {
     "express": "^4.17.1"

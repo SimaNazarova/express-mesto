@@ -1,18 +1,15 @@
 const fs = require('fs').promises;
 
-const readJson = (path) => {
-  return fs.readFile(path)
-  .catch(err => {
-    throw `file ${path} is not found`
-  }  )
-  .then((text) => {
-    try{
-      return JSON.parse(text);
-    }
-    catch (_) {
-      throw 'Json is invalid'
-    }
+const readJson = (path) => fs.readFile(path)
+  .catch(() => {
+    throw new Error(`file ${path} is not found`);
   })
-}
+  .then((text) => {
+    try {
+      return JSON.parse(text);
+    } catch (_) {
+      throw new Error('Json is invalid');
+    }
+  });
 
-module.exports= readJson;
+module.exports = readJson;
