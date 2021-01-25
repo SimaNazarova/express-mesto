@@ -12,14 +12,16 @@ const getUsers = (req, res) => {
 
 const getUser = (req, res) => {
   User.findById(req.params.id)
-    .then((user) => {
-      if (!user) {
-        res.status(404).send({ message: 'Нет пользователя с таким id' });
+    .orFail()
+    .then((user) => res.status(200).send({ data: user }))
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        return res.status(400).send({ message: 'Переданы некорректные данные' });
       }
-      res.status(200).send({ user });
-    })
-    .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+      if (err.name === 'DocumentNotFoundError') {
+        return res.status(404).send({ message: 'Нет пользователя с таким id' });
+      }
+      return res.status(500).send({ message: 'На сервере произошла ошибка' });
     });
 };
 
@@ -49,7 +51,7 @@ const updateUser = (req, res) => {
   )
     .then((user) => res.status(200).send({ data: user }))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.name === 'CastError') {
         return res.status(400).send({ message: 'Переданы некорректные данные' });
       }
       return res.status(500).send({ message: 'На сервере произошла ошибка' });
